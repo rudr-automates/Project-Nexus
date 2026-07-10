@@ -1,19 +1,16 @@
-# ===============================
-# Project Nexus
-# Git Ignore Rules
-# ===============================
-
-# Environment
-.env
-.env.*
-!.env.example
-
-# Docker
-docker-compose.override.yml
+# ============================================
+# Project Nexus Git Ignore
+# ============================================
 
 # Logs
 *.log
 logs/
+
+# Environment variables
+.env
+.env.*
+
+!.env.example
 
 # Temporary
 tmp/
@@ -23,7 +20,7 @@ temp/
 # VS Code
 .vscode/settings.json
 
-# OS
+# Operating System
 .DS_Store
 Thumbs.db
 
