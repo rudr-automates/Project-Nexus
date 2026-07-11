@@ -1,198 +1,316 @@
-# Project Nexus Bible
+# Project Nexus Constitution
+### The Foundational Charter of Project Nexus
 
-> "Infrastructure first. Automation forever."
+**Version:** 1.0.0  
+**Status:** Active  
+**Last Updated:** Milestone 2 — Connectivity Complete
+
+---
+
+# Purpose
+
+This document defines the vision, philosophy, engineering standards, governance, and long-term direction of Project Nexus.
+
+Unlike implementation documents, this constitution does not describe *how* features are built.
+
+Instead, it defines *why* the platform exists, *what principles guide engineering decisions*, and *what standards every future contribution must uphold.*
+
+Whenever uncertainty exists, this document takes precedence over convenience.
 
 ---
 
 # Mission
 
-Project Nexus is a long-term self-hosted automation platform built to support AI, workflow orchestration, browser automation, integrations, databases, monitoring, and future intelligent services.
+Project Nexus exists to provide a self-hosted intelligent automation platform that enables the development, operation, and scaling of reusable automation systems.
 
-The objective is not merely to run n8n.
+Rather than building isolated projects, Project Nexus provides shared infrastructure that allows multiple automation applications to coexist on a common, production-ready platform.
 
-The objective is to build infrastructure that can continuously evolve without requiring architectural redesign.
-
----
-
-# Philosophy
-
-Every decision made in this repository should follow these principles.
-
-## 1. Configuration over Hardcoding
-
-Nothing should be hardcoded if it may reasonably change in the future.
-
-Configuration belongs in:
-
-- .env
-- Docker Compose
-- Environment variables
-- Configuration files
-
-Never inside application logic unless absolutely required.
+The platform should remain modular, reproducible, maintainable, and extensible throughout its lifetime.
 
 ---
 
-## 2. Infrastructure Before Workflows
+# Vision
 
-Workflows depend on infrastructure.
+Project Nexus should eventually become an operating platform for intelligent automation.
 
-Infrastructure should never depend on workflows.
+It should provide:
 
-Build the platform first.
-
-Then build automation.
-
----
-
-## 3. One Responsibility Per Service
-
-Every container should have a single purpose.
-
-Examples:
-
-- n8n → Workflow engine
-- PostgreSQL → Database
-- Ollama → AI inference
-- Browser container → Automation
-- Monitoring stack → Observability
-
-Avoid "Swiss Army Knife" containers.
-
----
-
-## 4. Reproducibility
-
-The complete platform should be reproducible from Git alone.
-
-A fresh machine should require only:
-
-- Git clone
-- Docker
-- Docker Compose
-- Environment configuration
-
-Everything else should be created automatically.
-
----
-
-## 5. Security by Default
-
-Secrets never belong inside repositories.
-
-Sensitive values belong in:
-
-- .env
-- Docker Secrets (future)
-- Secret managers (future)
-
-Never commit credentials.
-
----
-
-## 6. Documentation Is Code
-
-If infrastructure changes:
-
-Documentation changes.
-
-Every architectural decision should have documentation.
-
----
-
-## 7. Modular Design
-
-Every future service should integrate without restructuring the repository.
-
-Examples:
-
-- AI
+- Infrastructure
+- Networking
+- Automation Runtime
+- Browser Runtime
+- AI Runtime
+- Shared Services
+- Security
 - Monitoring
-- Browser automation
-- Message queues
-- APIs
-- Databases
+- Documentation
+- Developer Tooling
 
-New services should plug into existing architecture.
+Applications should consume these capabilities instead of implementing them independently.
 
 ---
 
-## 8. Version Controlled Infrastructure
+# Platform Philosophy
 
-Infrastructure is source code.
+Project Nexus is a platform.
 
-Compose files
+Applications are built **on** the platform.
 
-Environment templates
+The platform exists to eliminate duplicated engineering work.
 
-Scripts
-
-Configuration
-
-Everything belongs in Git.
+Applications should focus entirely on solving business problems.
 
 ---
 
-## 9. Keep It Replaceable
+# Current Platform
 
-Every technology choice should be replaceable.
+Current platform capabilities include:
 
-Today:
-
-Docker Compose
-
-Tomorrow:
-
-Kubernetes
-
-Infrastructure should minimize vendor lock-in.
-
----
-
-## 10. Build Once. Improve Forever.
-
-Never optimize for quick hacks.
-
-Always optimize for long-term maintainability.
-
-Future development should extend the platform—not rebuild it.
+- Docker Infrastructure
+- Docker Compose
+- PostgreSQL
+- n8n
+- Cloudflare Tunnel
+- Shared Docker Network
+- Deployment Toolkit
+- Documentation
 
 ---
 
-# Engineering Standards
+# Future Platform
 
-Before adding anything, ask:
+Future platform capabilities include:
 
-- Does this belong here?
-- Can this be configured?
-- Can this be reused?
-- Is this documented?
-- Will this scale?
+- Browser Runtime
+- Playwright
+- Chromium
+- Ollama
+- Open WebUI
+- Vector Database
+- Shared Memory
+- AI Runtime
+- Monitoring Stack
+- Distributed Workers
 
-If the answer is "No", rethink the implementation.
+Each capability should integrate into the existing architecture instead of introducing unnecessary complexity.
 
 ---
 
-# Repository Goal
+# Platform vs Applications
 
-Project Nexus should eventually become capable of running:
+## Project Nexus owns
 
-- AI models
-- Automation workflows
-- Browser automation
-- APIs
-- Databases
+- Infrastructure
+- Runtime
+- Networking
+- Security
+- Storage
+- Browser Services
+- AI Runtime
 - Monitoring
-- Scheduling
-- Internal services
-- Future applications
-
-without major architectural changes.
+- Documentation
+- Shared Services
 
 ---
 
-# Motto
+## Applications own
 
-Build foundations once.
+- Business Logic
+- Domain Rules
+- Customer Workflows
+- Business Configuration
+- Reports
+- Customer Outcomes
 
-Build automations forever.
+This separation should always remain clear.
+
+---
+
+# Project Lynx
+
+Project Lynx is the first application built on Project Nexus.
+
+Its purpose is to automate business discovery and outreach through repeatable workflows.
+
+Project Lynx focuses on:
+
+- Business Discovery
+- Website Analysis
+- Contact Discovery
+- Lead Qualification
+- Outreach Preparation
+- CRM Integration
+
+Project Lynx should consume Project Nexus services rather than implementing infrastructure internally.
+
+---
+
+# Engineering Constitution
+
+Every engineering decision should satisfy the following principles.
+
+---
+
+## Principle 1
+
+**Build platforms before applications.**
+
+Infrastructure should benefit multiple future applications whenever practical.
+
+---
+
+## Principle 2
+
+**Automation before AI.**
+
+Automation must function reliably without an LLM.
+
+Artificial Intelligence should enhance automation rather than compensate for poor engineering.
+
+---
+
+## Principle 3
+
+**Docker-first deployment.**
+
+Permanent services belong inside Docker Compose.
+
+Temporary debugging containers are acceptable.
+
+Production services must remain reproducible.
+
+---
+
+## Principle 4
+
+**Self-host whenever practical.**
+
+Vendor independence is preferred.
+
+Paid services should only be introduced when they provide clear value.
+
+---
+
+## Principle 5
+
+**Documentation is part of the product.**
+
+No major architectural change should exist without corresponding documentation.
+
+---
+
+## Principle 6
+
+**Infrastructure before features.**
+
+Engineering effort should prioritize platform stability before introducing new capabilities.
+
+---
+
+## Principle 7
+
+**Prefer maintainability over cleverness.**
+
+Simple systems are easier to understand, debug, and extend.
+
+---
+
+## Principle 8
+
+**Every milestone must leave the repository deployable.**
+
+Development should never leave the project in a broken state.
+
+---
+
+## Principle 9
+
+**Avoid unnecessary architectural redesigns.**
+
+The platform should evolve through extension rather than constant restructuring.
+
+---
+
+## Principle 10
+
+**Shared capabilities belong to the platform.**
+
+Application-specific behavior belongs to applications.
+
+---
+
+# Current Roadmap
+
+## Completed
+
+- Foundation
+- Connectivity
+
+---
+
+## Current
+
+Automation Runtime
+
+Current priorities:
+
+- Browser automation
+- Chromium
+- Playwright
+- Shared runtime
+- Logging
+- Monitoring
+- Google integrations
+- Stable execution of Project Lynx
+
+---
+
+## Future
+
+- AI Runtime
+- AI Enhancement
+- Agent Ecosystem
+- Business Platform
+
+---
+
+# Governance
+
+Project Nexus values consistency over speed.
+
+Whenever multiple solutions exist, prefer the one that:
+
+- improves maintainability
+- reduces technical debt
+- preserves modularity
+- remains reproducible
+- benefits future projects
+
+---
+
+# Documentation Standards
+
+Every permanent service should eventually include documentation covering:
+
+- Purpose
+- Responsibilities
+- Dependencies
+- Configuration
+- Recovery
+- Future Improvements
+
+---
+
+# Definition of Success
+
+Project Nexus will be considered successful when it provides a stable platform capable of supporting multiple intelligent automation applications without requiring major architectural redesign.
+
+Applications should be able to evolve independently while relying on shared platform capabilities.
+
+---
+
+# Source of Truth
+
+This document serves as the constitutional foundation of Project Nexus.
+
+Whenever implementation, documentation, or future engineering discussions conflict with these principles, this constitution should be treated as the authoritative reference until intentionally revised through a documented architectural decision.

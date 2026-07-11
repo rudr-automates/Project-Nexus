@@ -1,97 +1,178 @@
 # Project Nexus
 
-> A self-hosted automation platform designed for scalable AI, workflow orchestration, browser automation, integrations, and future intelligent services.
+> **A Self-Hosted Intelligent Automation Platform**
+
+Project Nexus is a self-hosted intelligent automation platform designed to provide a production-grade foundation for building, operating, and scaling automation systems.
+
+Rather than being a single application, Project Nexus serves as a reusable platform that provides infrastructure, networking, browser automation, AI runtimes, storage, monitoring, security, and developer tooling for multiple automation projects.
+
+The first application built on Project Nexus is **Project Lynx**, an AI-assisted Lead Intelligence Engine focused on discovering businesses, auditing websites, qualifying opportunities, and preparing personalized outreach.
 
 ---
 
-## Vision
+# Vision
 
-Project Nexus is a long-term infrastructure project focused on building a reliable, maintainable, and scalable automation ecosystem.
+Project Nexus exists to eliminate repetitive engineering work when building automation systems.
 
-Rather than being a single n8n installation, Project Nexus serves as the foundation for multiple interconnected services including AI models, browser automation, databases, monitoring, and intelligent workflow orchestration.
+Instead of rebuilding infrastructure for every new project, the platform provides reusable services that can be shared across multiple automation applications.
 
-The objective is to build a platform that can continuously evolve without requiring major architectural changes.
-
----
-
-## Core Principles
-
-- Infrastructure before workflows
-- Configuration over hardcoding
-- Modular architecture
-- Security by default
-- Version controlled infrastructure
-- Reproducible deployments
-- Documentation-driven development
-- Long-term maintainability
+The long-term objective is to create a modular ecosystem where new automation projects inherit common capabilities rather than reimplementing them.
 
 ---
 
-## Planned Technology Stack
+# Core Principles
 
-| Layer | Technologies |
-|--------|--------------|
-| Automation | n8n |
-| Database | PostgreSQL |
-| Containers | Docker Compose |
-| Reverse Proxy | Cloudflare Tunnel |
-| AI | Ollama / Local LLMs |
-| Browser Automation | Playwright / Browser Containers |
-| Monitoring | Future Implementation |
-| Version Control | Git + GitHub |
+Project Nexus follows several engineering principles:
+
+- Platform before applications
+- Automation before AI
+- Docker-first architecture
+- Self-hosted whenever practical
+- Modular and reusable services
+- Documentation as part of the product
+- Infrastructure should always be reproducible
+- Prefer simplicity over unnecessary complexity
 
 ---
 
-## Repository Structure
+# Platform Architecture
 
+```text
+                    Project Nexus
+                           │
+    ┌──────────────────────┼──────────────────────┐
+    │                      │                      │
+Infrastructure        Shared Services        Automation Runtime
+    │                      │                      │
+Networking          Browser Runtime          AI Runtime
+Storage             Monitoring               Security
+Documentation       Developer Toolkit        Logging
+                           │
+                           ▼
+                     Applications
+                           │
+                     Project Lynx
 ```
+
+Project Nexus is the platform.
+
+Project Lynx is the first application built on top of that platform.
+
+Future applications will reuse the same shared infrastructure.
+
+---
+
+# Current Repository Structure
+
+```text
 Project-Nexus/
+
 ├── docs/
 ├── infrastructure/
 ├── services/
 ├── scripts/
 ├── backups/
 ├── local-files/
+│
+├── .env
 ├── README.md
 ├── PROJECT_BIBLE.md
-├── .gitignore
-└── .env.example
+└── .gitignore
 ```
 
 ---
 
-## Project Status
+# Current Development Stage
 
-| Component | Status |
-|-----------|--------|
-| Repository Foundation | 🟢 In Progress |
-| Development Environment | ⚪ Planned |
-| Infrastructure | ⚪ Planned |
-| External Access | ⚪ Planned |
-| Validation | ⚪ Planned |
+**Current Milestone**
 
----
+> Milestone 3 — Automation Runtime
 
-## Design Philosophy
+Completed milestones:
 
-Project Nexus is designed around separation of concerns.
+- ✅ Foundation
+- ✅ Connectivity
 
-Documentation, infrastructure, services, and workflows are treated as independent layers, allowing the platform to grow while remaining organized and maintainable.
+Current focus:
 
----
-
-## Long-Term Goals
-
-- Build reusable automation infrastructure
-- Deploy reliable production-grade n8n
-- Integrate local AI models
-- Support browser automation
-- Centralize workflow management
-- Maintain clean documentation
-- Enable rapid future expansion
+- Browser automation
+- Shared browser runtime
+- Project Lynx integration
+- Google Workspace integration
+- Workflow execution
+- Logging and monitoring
+- Production-ready automation services
 
 ---
 
-## License
+# Technology Stack
 
-Currently private. License will be determined when the project reaches production maturity.
+Current platform technologies include:
+
+- Docker
+- Docker Compose
+- n8n
+- PostgreSQL
+- Cloudflare Tunnel
+- Ubuntu (WSL2)
+- Git & GitHub
+
+Future additions include:
+
+- Ollama
+- Open WebUI
+- Playwright
+- Browser automation services
+- Local AI models
+- Monitoring stack
+
+---
+
+# Getting Started
+
+Clone the repository.
+
+Configure the environment variables.
+
+Start the infrastructure using the toolkit scripts.
+
+```bash
+./scripts/docker/up.sh
+```
+
+The platform can then be managed using the additional toolkit scripts located in:
+
+```text
+scripts/docker/
+```
+
+---
+
+# Documentation
+
+Project documentation is organized into dedicated sections.
+
+| Document | Purpose |
+|----------|---------|
+| PROJECT_BIBLE.md | Vision, governance and engineering principles |
+| Architecture | Platform design and technical decisions |
+| Roadmap | Development milestones |
+| Development Rules | Engineering standards |
+| Recovery | Disaster recovery and rebuild process |
+| AI Documentation | AI continuity and handoff |
+
+---
+
+# License
+
+This project is currently maintained as a private engineering platform.
+
+Licensing terms will be defined before the first public release.
+
+---
+
+## Status
+
+🚧 **Under Active Development**
+
+Project Nexus is currently progressing through **Milestone 3 — Automation Runtime**, where the platform is evolving from a stable infrastructure into a production-ready intelligent automation environment.

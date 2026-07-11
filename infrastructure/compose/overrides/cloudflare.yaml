@@ -1,0 +1,25 @@
+services:
+
+  cloudflared:
+
+    image: cloudflare/cloudflared:latest
+
+    container_name: project-nexus-cloudflared
+
+    restart: unless-stopped
+
+    command:
+      - --config
+      - /etc/cloudflared/config.yml
+      - tunnel
+      - run
+      - project-nexus
+
+    volumes:
+      - ../cloudflare/config:/etc/cloudflared:ro
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    networks:
+      - nexus-network
