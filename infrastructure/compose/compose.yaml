@@ -33,8 +33,9 @@ services:
       - nexus-network
 
 
+
   n8n:
-    image: n8nio/n8n:latest
+    image: n8nio/n8n:2.29.10
 
     container_name: project-nexus-n8n
 
@@ -43,12 +44,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      scraper:
+        condition: service_healthy
 
     env_file:
       - ../../.env
 
     environment:
-
       DB_TYPE: postgresdb
       DB_POSTGRESDB_HOST: postgres
       DB_POSTGRESDB_PORT: 5432
@@ -63,6 +65,8 @@ services:
 
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
 
+      N8N_PROXY_HOPS: 1
+
     ports:
       - "${N8N_PORT}:5678"
 
@@ -72,12 +76,70 @@ services:
     networks:
       - nexus-network
 
+  browserless:
+
+    image: ghcr.io/browserless/chromium:latest
+
+    container_name: project-nexus-browserless
+
+    restart: unless-stopped
+
+    environment:
+      TOKEN: ${BROWSERLESS_TOKEN}
+      CONCURRENT: ${BROWSERLESS_CONCURRENT}
+      TIMEOUT: ${BROWSERLESS_TIMEOUT}
+
+    ports:
+      - "3000:3000"
+
+    shm_size: 2gb
+
+    networks:
+      - nexus-network
+
+  scraper:
+
+    build:
+      context: ../../services/scraper
+
+    image: project-nexus/scraper:1.0.0
+
+    container_name: project-nexus-scraper
+
+    restart: unless-stopped
+
+    depends_on:
+      browserless:
+        condition: service_started
+
+    env_file:
+      - ../../.env
+
+    environment:
+      PORT: ${SCRAPER_PORT}
+      BROWSERLESS_WS_ENDPOINT: ${BROWSERLESS_WS_ENDPOINT}
+      BROWSERLESS_TOKEN: ${BROWSERLESS_TOKEN}
+      SCRAPER_NAV_TIMEOUT_MS: ${SCRAPER_NAV_TIMEOUT_MS}
+      SCRAPER_MAX_NAV_TIMEOUT_MS: ${SCRAPER_MAX_NAV_TIMEOUT_MS}
+      SCRAPER_MAX_SCREENSHOT_DATA_URL_LENGTH: ${SCRAPER_MAX_SCREENSHOT_DATA_URL_LENGTH}
+      LOG_LEVEL: ${LOG_LEVEL}
+
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:4000/health', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+    networks:
+      - nexus-network
 
 volumes:
 
   postgres-data:
 
   n8n-data:
+
 
 
 networks:
