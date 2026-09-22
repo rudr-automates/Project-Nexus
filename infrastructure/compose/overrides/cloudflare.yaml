@@ -9,17 +9,11 @@ services:
     restart: unless-stopped
 
     command:
-      - --config
-      - /etc/cloudflared/config.yml
       - tunnel
+      - --no-autoupdate
       - run
-      - project-nexus
-
-    volumes:
-      - ../cloudflare/config:/etc/cloudflared:ro
-
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - --token
+      - ${CLOUDFLARE_TUNNEL_TOKEN}
 
     networks:
       - nexus-network

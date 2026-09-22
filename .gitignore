@@ -46,6 +46,9 @@ volumes/
 # Secrets
 secrets/
 
+# Cloudflare tunnel credentials
+infrastructure/cloudflare/config/*.json
+
 # Local backups
 *.bak
 *.backup
