@@ -69,6 +69,10 @@ This allows future applications to inherit the same foundation instead of creati
 
 Nexus currently consists of several cooperating layers.
 
+![Project Nexus Architecture](./docs/architecture/assets/nexus-architecture.png)
+
+*Current platform architecture - Project Nexus*
+
 ### Public Ingress
 
 **Cloudflare Tunnel** provides secure public access to the platform without directly exposing the underlying host.
